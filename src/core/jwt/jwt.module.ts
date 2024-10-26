@@ -9,7 +9,7 @@ import { Global, Module } from '@nestjs/common';
       inject: [ConfigService],
       useFactory: (configService: ConfigService) => ({
         global: true,
-        secret: configService.get<string>('secret'),
+        secret: configService.get<string>('accessSecret'),
         signOptions: { expiresIn: '1d' },
       }),
     }),

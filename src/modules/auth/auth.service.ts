@@ -15,7 +15,7 @@ export class AuthService {
   async login(authLoginDto: AuthLoginDto) {
     const user = await this.usersService.findOneByEmail(authLoginDto.email);
 
-    if (user == null || !compareSync(user.password, authLoginDto.password)) {
+    if (user == null || !compareSync(authLoginDto.password, user.password)) {
       throw new HttpException('Incorrect email or password', 401);
     }
 
@@ -27,7 +27,7 @@ export class AuthService {
   async updatePassword(userId: number, updatePasswordDto: UpdatePasswordDto) {
     const user = await this.usersService.findOneByIdOrFail(userId);
 
-    if (!compareSync(user.password, updatePasswordDto.oldPassword)) {
+    if (!compareSync(updatePasswordDto.oldPassword, user.password)) {
       throw new HttpException('Incorrect password', 401);
     }
 

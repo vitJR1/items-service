@@ -50,11 +50,17 @@ export class UsersService {
   }
 
   findOneByIdOrFail(id: number) {
-    return this.userRepository.findOneByOrFail({ id });
+    return this.userRepository.findOneOrFail({
+      select: ['id', 'password'],
+      where: { id },
+    });
   }
 
   findOneByEmail(email: string) {
-    return this.userRepository.findOneBy({ email });
+    return this.userRepository.findOne({
+      select: ['id', 'password'],
+      where: { email },
+    });
   }
 
   update(id: number, updateUserDto: UpdateUserDto) {
@@ -73,7 +79,7 @@ export class UsersService {
     return this.userRepository.save(
       plainToInstance(User, {
         id,
-        password: password,
+        password,
       }),
     );
   }

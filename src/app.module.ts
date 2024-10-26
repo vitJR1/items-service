@@ -10,6 +10,7 @@ import { ConfigModule } from '@nestjs/config';
 import { config } from './core/config';
 import typeorm from './core/config/typeorm';
 import { CacheModule } from '@nestjs/cache-manager';
+import { GlobalJwtModule } from './core/jwt/jwt.module';
 
 @Module({
   imports: [
