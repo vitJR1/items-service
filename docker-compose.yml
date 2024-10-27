@@ -1,0 +1,46 @@
+version: '3'
+
+services:
+  backend:
+    build: .
+    ports:
+      - "8090:80"
+    volumes:
+      - .:/usr/src/app
+    command: node main
+    depends_on:
+      postgres:
+        condition: service_healthy
+      redis:
+        condition: service_started
+    env_file:
+      - .env.docker  # Loading variables from the .env file
+    networks:
+      - items-net
+
+  redis:
+    image: redis:latest
+    ports:
+      - "6379:6379"
+    networks:
+      - items-net
+
+  postgres:
+    image: postgres:16.4
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: root
+      POSTGRES_DB: items
+    ports:
+      - "5432:5432"
+    networks:
+      - items-net
+    healthcheck:
+      test: [ "CMD-SHELL", "pg_isready -U postgres" ]
+      interval: 10s  # Check every 10 seconds
+      timeout: 5s    # Timeout after 5 seconds
+      retries: 5
+
+networks:
+  items-net:
+    driver: bridge
