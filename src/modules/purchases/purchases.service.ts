@@ -63,6 +63,7 @@ export class PurchasesService {
   findAll(purchaseListFiterDto: PurchaseListFiterDto) {
     return this.purchaseRepository
       .findAndCount({
+        relations: ['user', 'item'],
         where: {
           item:
             purchaseListFiterDto.search?.length > 0
@@ -82,6 +83,9 @@ export class PurchasesService {
   }
 
   findOne(id: number) {
-    return this.purchaseRepository.findOneBy({ id });
+    return this.purchaseRepository.findOne({
+      relations: ['user', 'item'],
+      where: { id },
+    });
   }
 }
