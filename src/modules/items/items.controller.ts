@@ -31,7 +31,7 @@ export class ItemsController {
   @Get(':id')
   @ApiBearerAuth('JWT')
   @UseGuards(JwtAuthGuard)
-  findOne(@Param() id: number) {
+  findOne(@Param('id') id: number) {
     return this.itemsService.findOne(id);
   }
 
