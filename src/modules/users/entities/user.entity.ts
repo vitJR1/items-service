@@ -22,7 +22,7 @@ export class User {
   password: string;
 
   @Column({ type: 'numeric', precision: 15, scale: 2, default: 0 })
-  balance: string;
+  balance: number;
 
   @Column({ type: 'timestamp without time zone', default: () => 'now()' })
   created_at: string;
