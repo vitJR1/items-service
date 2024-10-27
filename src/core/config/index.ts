@@ -14,6 +14,5 @@ export const config = (): IConfig => ({
     port: parseInt(process.env.REDIS_PORT, 10) || 6379,
     password: process.env.REDIS_PASSWORD,
     ttl: parseInt(process.env.CACHE_TTL, 10) || 300,
-    max: parseInt(process.env.CACHE_MAX, 10) || 100,
   },
 });

@@ -5,7 +5,7 @@ import {
   Entity,
   PrimaryGeneratedColumn,
 } from 'typeorm';
-import { Currency } from '../types/currency';
+import { Currency } from '../enum/currency.enum';
 
 @Entity('items')
 export class Item {
@@ -15,7 +15,7 @@ export class Item {
   @Column({ type: 'varchar', length: 255 })
   market_hash_name: string;
 
-  @Column({ type: 'varchar', length: 255 })
+  @Column({ type: 'varchar', length: 3 })
   currency: Currency;
 
   @Column({ type: 'varchar', length: 255 })

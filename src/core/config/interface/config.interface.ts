@@ -9,7 +9,6 @@ interface Cache {
   port: number;
   password: string;
   ttl: number;
-  max: number;
 }
 
 export interface IConfig {
