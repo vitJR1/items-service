@@ -1,11 +1,18 @@
-import { Injectable } from '@nestjs/common';
+import { Inject, Injectable } from '@nestjs/common';
 import { ItemsAxiosProvider } from './items.axios.provider';
 import { ItemsFilterDto } from './dto/items-filter.dto';
 import { ItemMinPrice } from './types/item-min-price';
+import { Repository } from 'typeorm';
+import { Item } from './entities/item.entity';
+import { CreateItemDto } from './dto/create-item.dto';
 
 @Injectable()
 export class ItemsService {
-  constructor(private readonly items: ItemsAxiosProvider) {}
+  constructor(
+    @Inject('ITEMS_REPOSITORY')
+    private readonly itemRepository: Repository<Item>,
+    private readonly items: ItemsAxiosProvider,
+  ) {}
 
   async findAll(itemsFilterDto: ItemsFilterDto) {
     const [tradableItems, untradeableItems] = await Promise.all([
@@ -47,6 +54,14 @@ export class ItemsService {
       dataMap.set(uti.market_hash_name, ti);
     });
 
-    return [...dataMap.values()]; // n * n
+    return [...dataMap.values()];
+  }
+
+  findOne(id: number) {
+    return this.itemRepository.findOneBy({ id });
+  }
+
+  create(createItemDto: CreateItemDto) {
+    return this.itemRepository.save(createItemDto);
   }
 }

@@ -25,16 +25,16 @@ export class Item {
   market_page: string;
 
   @Column({ type: 'numeric', precision: 15, scale: 2, default: 0 })
-  suggested_price: string;
+  suggested_price: number;
 
   @Column({ type: 'numeric', precision: 15, scale: 2, default: 0 })
-  min_price: string;
+  min_price: number;
 
   @Column({ type: 'numeric', precision: 15, scale: 2, default: 0 })
-  max_price: string;
+  max_price: number;
 
   @Column({ type: 'numeric', precision: 15, scale: 2, default: 0 })
-  mean_price: string;
+  mean_price: number;
 
   @Column({ type: 'integer', default: 0 })
   quantity: number;

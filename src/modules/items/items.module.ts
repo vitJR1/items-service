@@ -3,10 +3,13 @@ import { ItemsService } from './items.service';
 import { ItemsController } from './items.controller';
 import { ItemsAxiosProvider } from './items.axios.provider';
 import { AxiosModule } from '../../core/axios/axios.module';
+import { itemsProvider } from './items.provider';
+import { DatabaseModule } from '../../core/database/database.module';
 
 @Module({
-  imports: [AxiosModule],
+  imports: [DatabaseModule, AxiosModule],
   controllers: [ItemsController],
-  providers: [ItemsService, ItemsAxiosProvider],
+  providers: [...itemsProvider, ItemsService, ItemsAxiosProvider],
+  exports: [ItemsService],
 })
 export class ItemsModule {}
