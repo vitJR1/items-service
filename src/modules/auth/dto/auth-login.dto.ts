@@ -6,7 +6,7 @@ export class AuthLoginDto {
   @IsString()
   email: string;
 
-  @ApiProperty({ required: true, default: 'String1!' })
+  @ApiProperty({ required: true, default: 'admin' })
   @IsString()
   password: string;
 }

@@ -38,3 +38,19 @@ run
 ```bash
 docker compose up -d
 ```
+
+/login
+
+login: admin
+password: admin
+
+/auth/update-password
+policy: `String1!`
+{
+  minLength: 8,
+  minUppercase: 1,
+  minSymbols: 1,
+  minNumbers: 1,
+  minLowercase: 1,
+};
+
